@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reset Password - AutoPlay</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white font-sans flex items-center justify-center min-h-screen p-4">
+
+  <div class="bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-md">
+    <h1 class="text-3xl font-bold mb-6 text-center">🔐 Reset Your Password</h1>
+
+    <form id="password-form">
+      <input
+        type="password"
+        id="new-password"
+        placeholder="Enter your new password"
+        required
+        class="w-full px-4 py-3 mb-4 rounded bg-gray-700 text-white placeholder-gray-400 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      <button
+        type="submit"
+        class="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 rounded transition duration-200"
+      >
+        Update Password
+      </button>
+    </form>
+
+    <p id="message" class="mt-4 text-center text-sm font-medium"></p>
+
+    <p class="mt-6 text-xs text-center text-gray-400">
+      If you have issues, contact <a href="https://davidbriangarcia.github.io/portafolio/autoplay/support/" class="underline text-blue-400 hover:text-blue-300">support</a>.
+    </p>
+  </div>
+
+  <script>
+        // IMPORTANT: Replace with your actual Supabase URL and Anon Key
+        const SUPABASE_URL = 'https://tugzzpqeuuwcipkcprsm.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR1Z3p6cHFldXV3Y2lwa2NwcnNtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc1MjY0MTEsImV4cCI6MjA2MzEwMjQxMX0.jjjLGa-1q5iZ282YF6es_CsaS0eu7e6uIwyLjLw0LsU'; // Make sure to replace this!
+
+        // Correctly initialize the Supabase client
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        const messageEl = document.getElementById('message');
+        const form = document.getElementById('password-form');
+
+        form.addEventListener('submit', async (event) => {
+            // This prevents the page from reloading
+            event.preventDefault(); 
+            
+            const newPassword = document.getElementById('new-password').value;
+            messageEl.textContent = 'Updating...';
+            messageEl.style.color = 'black';
+
+            // Supabase JS client automatically handles the session from the URL fragment
+            const { data, error } = await supabaseClient.auth.updateUser({
+                password: newPassword
+            });
+
+            if (error) {
+                messageEl.textContent = 'Error: ' + error.message;
+                messageEl.style.color = 'red';
+            } else {
+                messageEl.textContent = 'Password updated successfully! You can now close this page and log in with your new password in the AutoPlay app.';
+                messageEl.style.color = 'green';
+                form.style.display = 'none'; // Hide the form on success
+            }
+        });
+    </script>
+
+</body>
+</html>
