@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="../public/logo64.ico" type="image/x-icon">
   <title>AutoPlay - Support</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -10,8 +11,8 @@
 
   <!-- Header -->
   <header class="bg-gradient-to-r from-purple-700 to-blue-700 py-8 text-center">
-    <h1 class="flex justify-center text-4xl font-bold">Need Help?</h1>
-    <p class="flex justify-center text-lg mt-2">We’re here to assist you with AutoPlay</p>
+    <h1 id="main-title" class="flex justify-center text-4xl font-bold">Need Help?</h1>
+    <p id="subtitle" class="flex justify-center text-lg mt-2">We’re here to assist you with AutoPlay</p>
   </header>
 
   <!-- Support Options -->
@@ -20,10 +21,11 @@
   <main class="flex-grow px-6 py-12 max-w-2xl mx-auto">
     
     <section class="bg-gray-800 rounded-lg p-6 shadow-lg mb-6">
-      <h2 class="flex justify-center text-2xl font-semibold mb-4">📘 See our guides</h2>
-      <p class="flex justify-center mb-4 text-gray-300">Read our guides for information on how to use AutoPlay.</p>
+      <h2 id="guides-title" class="flex justify-center text-2xl font-semibold mb-4">📘 See our guides</h2>
+      <p id="guides-desc" class="flex justify-center mb-4 text-gray-300">Read our guides for information on how to use AutoPlay.</p>
       <div class="flex justify-center">
   <a href="/help/index.html"
+     id="guides-button"
      class="inline-block bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
     Help Guides
   </a>
@@ -31,10 +33,11 @@
 
     </section>
     <section class="bg-gray-800 rounded-lg p-6 shadow-lg mb-6">
-      <h2 class="flex justify-center text-2xl font-semibold mb-4">💬 Join our Discord</h2>
-      <p class="flex justify-center mb-4 text-gray-300">Ask questions, report issues, or talk with other users.</p>
+      <h2 id="discord-title" class="flex justify-center text-2xl font-semibold mb-4">💬 Join our Discord</h2>
+      <p id="discord-desc" class="flex justify-center mb-4 text-gray-300">Ask questions, report issues, or talk with other users.</p>
       <div class="flex justify-center">
   <a href="https://discord.gg/J5zsW5nZQr" target="_blank"
+      id="discord-button"
      class="inline-block bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded">
     Go to Discord Support
   </a>
@@ -43,10 +46,11 @@
     </section>
 
     <section class="bg-gray-800 rounded-lg p-6 shadow-lg">
-      <h2 class="flex justify-center text-2xl font-semibold mb-4">📧 Contact Support via Email</h2>
-      <p class="flex justify-center mb-4 text-gray-300">Need personalized help? Send us a message anytime.</p>
+      <h2 id="email-title" class="flex justify-center text-2xl font-semibold mb-4">📧 Contact Support via Email</h2>
+      <p id="email-desc" class="flex justify-center mb-4 text-gray-300">Need personalized help? Send us a message anytime.</p>
       <div class="flex justify-center">
   <a href="mailto:davidbriangarciaa@gmail.com"
+      id="email-button"
      class="inline-block bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
     Email Us
   </a>
@@ -58,8 +62,75 @@
 
   <!-- Footer -->
   <footer class="text-center py-6 text-gray-500 text-sm bg-gray-900 border-t border-gray-700">
-    © 2025 DaveSoftwarePeru. All rights reserved.
+    <div class="flex justify-center space-x-4 mb-4">
+        <a href="#" onclick="setLanguage('en'); return false;" class="hover:text-white">English</a>
+        <a href="#" onclick="setLanguage('es'); return false;" class="hover:text-white">Español</a>
+        <a href="https://autoplaype.com/support" id="footer-support" class="hover:text-white">Support</a>
+        <a href="https://autoplaype.com/help" id="footer-help" class="hover:text-white">Help</a>
+        <a href="https://autoplaype.com/privacy" id="footer-privacy" class="hover:text-white">Privacy</a>
+    </div>
+    <p id="footer-copyright">© 2025 DaveSoftwarePeru. All rights reserved.</p>
   </footer>
+
+  <script>
+    const translations = {
+      en: {
+        "main-title": "Need Help?",
+        "subtitle": "We’re here to assist you with AutoPlay",
+        "guides-title": "📘 See our guides",
+        "guides-desc": "Read our guides for information on how to use AutoPlay.",
+        "guides-button": "Help Guides",
+        "discord-title": "💬 Join our Discord",
+        "discord-desc": "Ask questions, report issues, or talk with other users.",
+        "discord-button": "Go to Discord Support",
+        "email-title": "📧 Contact Support via Email",
+        "email-desc": "Need personalized help? Send us a message anytime.",
+        "email-button": "Email Us",
+        "footer-support": "Support",
+        "footer-help": "Help",
+        "footer-privacy": "Privacy",
+        "footer-copyright": "© 2025 DaveSoftwarePeru. All rights reserved."
+      },
+      es: {
+        "main-title": "¿Necesitas Ayuda?",
+        "subtitle": "Estamos aquí para ayudarte con AutoPlay",
+        "guides-title": "📘 Consulta nuestras guías",
+        "guides-desc": "Lee nuestras guías para obtener información sobre cómo usar AutoPlay.",
+        "guides-button": "Guías de Ayuda",
+        "discord-title": "💬 Únete a nuestro Discord",
+        "discord-desc": "Haz preguntas, informa problemas o habla con otros usuarios.",
+        "discord-button": "Ir al Soporte de Discord",
+        "email-title": "📧 Contacta a Soporte por Correo Electrónico",
+        "email-desc": "¿Necesitas ayuda personalizada? Envíanos un mensaje en cualquier momento.",
+        "email-button": "Envíanos un Correo",
+        "footer-support": "Soporte",
+        "footer-help": "Ayuda",
+        "footer-privacy": "Privacidad",
+        "footer-copyright": "© 2025 DaveSoftwarePeru. Todos los derechos reservados."
+      }
+    };
+
+    function setLanguage(lang) {
+      localStorage.setItem('language', lang);
+      applyTranslations(lang);
+    }
+
+    function applyTranslations(lang) {
+      document.documentElement.lang = lang;
+      for (const key in translations[lang]) {
+        const element = document.getElementById(key);
+        if (element) {
+          element.textContent = translations[lang][key];
+        }
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedLang = localStorage.getItem('language') || navigator.language.split('-')[0];
+      const lang = translations[savedLang] ? savedLang : 'en';
+      applyTranslations(lang);
+    });
+  </script>
 
 </body>
 </html>

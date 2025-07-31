@@ -1,19 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cómo Guardar, Cargar y Gestionar Macros - Ayuda de AutoPlay</title>
+    <link rel="icon" href="../public/logo64.ico" type="image/x-icon">
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>Guardar, cargar y eliminar macros</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style> body { font-family: 'Inter', sans-serif; } </style>
 </head>
 <body class="bg-gray-900 text-white">
     <div class="container mx-auto p-8">
-        <a href="index.html" class="text-blue-400 hover:underline mb-4 inline-block">&larr; Back to Help Center</a>
-        <h1 class="text-3xl font-bold mb-4">Guardar, cargar y eliminar macros</h1>
-        <div class="bg-gray-800 p-6 rounded-lg shadow-md">
-            <p>A macro is a sequence of user actions (like keystrokes, mouse clicks, etc.) that can be recorded and then played back to automate repetitive tasks.</p>
+        <a href="index.html" class="text-blue-400 hover:underline mb-4 inline-block">&larr; Volver al Centro de Ayuda</a>
+        <h1 class="text-3xl font-bold mb-6">Cómo Guardar, Cargar y Gestionar Macros</h1>
+        
+        <div class="bg-gray-800 p-6 rounded-lg shadow-md space-y-6">
+            
+            <div>
+                <h2 class="text-2xl font-semibold border-b border-gray-700 pb-2 mb-3">Guardar una Macro</h2>
+                <p>Una vez que hayas grabado una macro con la que estés satisfecho, querrás guardarla para usarla en el futuro.</p>
+                <ol class="list-decimal list-inside space-y-2 pl-4">
+                    <li>Después de detener la grabación, haz clic en el botón <strong class="font-semibold">"Guardar"</strong>.</li>
+                    <li>Aparecerá un diálogo de archivo. Elige una ubicación en tu computadora, dale a tu macro un nombre descriptivo (p. ej., "automatizacion-reporte-diario") y haz clic en <strong class="font-semibold">"Guardar"</strong>.</li>
+                    <li>Tu macro ahora está guardada como un archivo <code class="bg-gray-700 px-2 py-1 rounded">.json</code>.</li>
+                </ol>
+            </div>
+
+            <div>
+                <h2 class="text-2xl font-semibold border-b border-gray-700 pb-2 mb-3">Cargar una Macro</h2>
+                <p>Puedes cargar cualquier macro que hayas guardado previamente para volver a reproducirla.</p>
+                <ol class="list-decimal list-inside space-y-2 pl-4">
+                    <li>Haz clic en el botón <strong class="font-semibold">"Cargar"</strong> en la ventana principal.</li>
+                    <li>Busca y selecciona el archivo <code class="bg-gray-700 px-2 py-1 rounded">.json</code> de la macro que deseas usar.</li>
+                    <li>Los pasos de la macro se cargarán en la aplicación, listos para que los reproduzcas, edites o asignes a un atajo de teclado.</li>
+                </ol>
+            </div>
+
+            <div>
+                <h2 class="text-2xl font-semibold border-b border-gray-700 pb-2 mb-3">Gestionar Tus Macros</h2>
+                <p>Gestionar adecuadamente tus archivos de macros es clave para un flujo de trabajo eficiente.</p>
+                <ul class="list-disc list-inside space-y-3 pl-4 mt-2">
+                    <li><strong class="font-semibold">Organiza Tus Archivos:</strong> Recomendamos crear una carpeta dedicada para guardar todos tus archivos <code class="bg-gray-700 px-2 py-1 rounded">.json</code> de macros para que siempre puedas encontrarlos fácilmente.</li>
+                    <li><strong class="font-semibold">Eliminar Macros:</strong> Para eliminar una macro, simplemente borra su archivo <code class="bg-gray-700 px-2 py-1 rounded">.json</code> de tu computadora usando el explorador de archivos.</li>
+                </ul>
+            </div>
+
         </div>
     </div>
 </body>
