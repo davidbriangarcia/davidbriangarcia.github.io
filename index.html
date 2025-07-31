@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AutoPlay - Automate Your PC</title>
+  <link rel="icon" href="public/logo64.ico" type="image/x-icon">
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-900 text-white font-sans">
@@ -11,10 +12,10 @@
   <!-- Main Hero -->
   <section class="text-center py-10 px-4 bg-gradient-to-br from-blue-700 to-purple-700">
     <h1 class="text-4xl md:text-5xl font-bold mb-4">AutoPlay</h1>
-    <p class="text-lg md:text-xl mb-6">Automate your PC like a pro. Record and run macros with precision.</p>
+    <p id="hero-subtitle" class="text-lg md:text-xl mb-6">Automate your PC like a pro. Record and run macros with precision.</p>
     <div class="mt-4">
-      <a href="https://tugzzpqeuuwcipkcprsm.supabase.co/storage/v1/object/public/exe//AutoPlay.exe" class="bg-white text-gray-900 font-bold px-6 py-3 rounded hover:bg-gray-200 inline-block">Download now</a>
-      <p class="mt-2 text-sm text-gray-300">
+      <a id="hero-download" href="https://tugzzpqeuuwcipkcprsm.supabase.co/storage/v1/object/public/exe//AutoPlay.exe" class="bg-white text-gray-900 font-bold px-6 py-3 rounded hover:bg-gray-200 inline-block">Download now</a>
+      <p id="hero-eula" class="mt-2 text-sm text-gray-300">
       By downloading, you agree to the <a href="https://davidbriangarcia.github.io/portafolio/autoplay/eula/" class="underline hover:text-white">EULA</a>.
       </p>
     </div>
@@ -22,39 +23,39 @@
 
   <!-- What it does -->
   <section class="py-4 px-4 max-w-4xl mx-auto">
-    <h2 class="text-3xl font-bold text-center mb-8">What can you do with AutoPlay?</h2>
+    <h2 id="features-title" class="text-3xl font-bold text-center mb-8">What can you do with AutoPlay?</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div class="bg-gray-800 p-6 rounded-lg">
-        <h3 class="font-semibold text-xl mb-2">🎥 Record and replay actions</h3>
-        <p>Capture clicks, mouse movements, and keystrokes with millimetric precision.</p>
+        <h3 id="feature-1-title" class="font-semibold text-xl mb-2">🎥 Record and replay actions</h3>
+        <p id="feature-1-desc">Capture clicks, mouse movements, and keystrokes with millimetric precision.</p>
       </div>
       <div class="bg-gray-800 p-6 rounded-lg">
-        <h3 class="font-semibold text-xl mb-2">🔥Assign hotkeys to boring actions.</h3>
-        <p>Run your macros with a single key or key combination to automate actions effortlessly.</p>
+        <h3 id="feature-2-title" class="font-semibold text-xl mb-2">🔥Assign hotkeys to boring actions.</h3>
+        <p id="feature-2-desc">Run your macros with a single key or key combination to automate actions effortlessly.</p>
       </div>
       <div class="bg-gray-800 p-6 rounded-lg">
-        <h3 class="font-semibold text-xl mb-2">⚡ Quick execution</h3>
-        <p>Assign pre-recorded macros to side buttons to launch them instantly.</p>
+        <h3 id="feature-3-title" class="font-semibold text-xl mb-2">⚡ Quick execution</h3>
+        <p id="feature-3-desc">Assign pre-recorded macros to side buttons to launch them instantly.</p>
       </div>
       <div class="bg-gray-800 p-6 rounded-lg">
-        <h3 class="font-semibold text-xl mb-2">🛠️ Advanced modifiers</h3>
-        <p>Add delay or repeat your macros as many times as you want.</p>
+        <h3 id="feature-4-title" class="font-semibold text-xl mb-2">🛠️ Advanced modifiers</h3>
+        <p id="feature-4-desc">Add delay or repeat your macros as many times as you want.</p>
       </div>
       <div class="bg-gray-800 p-6 rounded-lg">
-        <h3 class="font-semibold text-xl mb-2">🪶 Portable and lightweight</h3>
-        <p>No installers or setup. Just download the 1MB .exe, and run it.</p>
+        <h3 id="feature-5-title" class="font-semibold text-xl mb-2">🪶 Portable and lightweight</h3>
+        <p id="feature-5-desc">No installers or setup. Just download the 1MB .exe, and run it.</p>
       </div>
       <div class="bg-gray-800 p-6 rounded-lg">
-        <h3 class="font-semibold text-xl mb-2">💾 Save and load macros</h3>
-        <p>Export your macros as .json files for easy reuse.</p>
+        <h3 id="feature-6-title" class="font-semibold text-xl mb-2">💾 Save and load macros</h3>
+        <p id="feature-6-desc">Export your macros as .json files for easy reuse.</p>
       </div>
       <div class="bg-gray-800 p-6 rounded-lg">
-        <h3 class="font-semibold text-xl mb-2">🔐 Secure by design</h3>
-        <p>Your data stays safe with built-in encryption and auto-login secured.</p>
+        <h3 id="feature-7-title" class="font-semibold text-xl mb-2">🔐 Secure by design</h3>
+        <p id="feature-7-desc">Your data stays safe with built-in encryption and auto-login secured.</p>
       </div>
       <div class="bg-gray-800 p-6 rounded-lg">
-        <h3 class="font-semibold text-xl mb-2">🌐 Multi-language ready</h3>
-        <p>Now available in English and Spanish — more languages coming soon!</p>
+        <h3 id="feature-8-title" class="font-semibold text-xl mb-2">🌐 Multi-language ready</h3>
+        <p id="feature-8-desc">Now available in English and Spanish — more languages coming soon!</p>
       </div>
 
     </div>
@@ -62,8 +63,8 @@
 
   <!-- Preview -->
   <section class="py-12 px-4 text-center">
-    <h2 class="text-3xl font-bold mb-6">Program Preview</h2>
-    <p class="mb-6 text-gray-300">This is how AutoPlay looks in action: recording and editing your macros.</p>
+    <h2 id="preview-title" class="text-3xl font-bold mb-6">Program Preview</h2>
+    <p id="preview-desc" class="mb-6 text-gray-300">This is how AutoPlay looks in action: recording and editing your macros.</p>
     <div class="w-full flex justify-center">
       <img src="captura-app.png"
            alt="AutoPlay Preview"
@@ -74,46 +75,46 @@
 
   <!-- Free vs PRO -->
   <section class="py-12 px-4 bg-gray-800">
-    <h2 class="text-3xl font-bold text-center mb-8">Free vs PRO</h2>
+    <h2 id="pricing-title" class="text-3xl font-bold text-center mb-8">Free vs PRO</h2>
     <div class="overflow-x-auto">
       <table class="table-auto w-full max-w-4xl mx-auto text-center border border-gray-700">
         <thead>
           <tr class="bg-gray-700">
-            <th class="p-4">Feature</th>
-            <th class="p-4">Free</th>
-            <th class="p-4">PRO</th>
+            <th id="table-feature" class="p-4">Feature</th>
+            <th id="table-free" class="p-4">Free</th>
+            <th id="table-pro" class="p-4">PRO</th>
           </tr>
         </thead>
         <tbody>
           <tr class="border-t border-gray-600">
-            <td class="p-4">Simultaneous Macros</td>
+            <td id="feature-simultaneous" class="p-4">Simultaneous Macros</td>
             <td class="p-4">1</td>
-            <td class="p-4">Unlimited</td>
+            <td id="feature-simultaneous-pro" class="p-4">Unlimited</td>
           </tr>
           <tr class="border-t border-gray-600">
-            <td class="p-4">Hotkeys</td>
-            <td class="p-4">✅</td>
-            <td class="p-4">✅</td>
-          </tr>
-          <tr class="border-t border-gray-600">
-            <td class="p-4">Save/Load .json</td>
+            <td id="feature-hotkeys" class="p-4">Hotkeys</td>
             <td class="p-4">✅</td>
             <td class="p-4">✅</td>
           </tr>
           <tr class="border-t border-gray-600">
-            <td class="p-4">Special Support</td>
+            <td id="feature-saveload" class="p-4">Save/Load .json</td>
+            <td class="p-4">✅</td>
+            <td class="p-4">✅</td>
+          </tr>
+          <tr class="border-t border-gray-600">
+            <td id="feature-support" class="p-4">Special Support</td>
             <td class="p-4">❌</td>
             <td class="p-4">✅</td>
           </tr>
           <tr class="border-t border-gray-600">
-            <td class="p-4">Future features</td>
+            <td id="feature-future" class="p-4">Future features</td>
             <td class="p-4">❌</td>
             <td class="p-4">✅</td>
           </tr>
           <tr class="border-t border-gray-600 bg-gray-700 font-bold">
-            <td class="p-4">Price</td>
-            <td class="p-4">Free</td>
-            <td class="p-4 text-green-400">$2/ month</td>
+            <td id="table-price" class="p-4">Price</td>
+            <td id="table-price-free" class="p-4">Free</td>
+            <td id="table-price-pro" class="p-4 text-green-400">$2/ month</td>
           </tr>
         </tbody>
       </table>
@@ -122,15 +123,124 @@
 
   <!-- Call to Action -->
   <section class="text-center py-16 px-4 bg-gradient-to-br from-purple-700 to-blue-700" id="download">
-    <h2 class="text-4xl font-bold mb-4">Unlock your productivity</h2>
-    <p class="text-xl mb-6">For only <span class="font-bold text-green-300">$2 monthly</span> access the full power of AutoPlay.</p>
-    <p class="mt-4 text-sm text-gray-200">Compatible with Windows 10 and 11</p>
+    <h2 id="cta-title" class="text-4xl font-bold mb-4">Unlock your productivity</h2>
+    <p id="cta-subtitle" class="text-xl mb-6">For only <span class="font-bold text-green-300">$2 monthly</span> access the full power of AutoPlay.</p>
+    <p id="cta-compatibility" class="mt-4 text-sm text-gray-200">Compatible with Windows 10 and 11</p>
   </section>
 
   <!-- Footer -->
   <footer class="text-center py-6 text-gray-500 text-sm bg-gray-900 border-t border-gray-700">
-    © 2025 DaveSoftwarePeru. All rights reserved.
+    <div class="flex justify-center space-x-4 mb-4">
+        <a href="#" onclick="setLanguage('en'); return false;" class="hover:text-white">English</a>
+        <a href="#" onclick="setLanguage('es'); return false;" class="hover:text-white">Español</a>
+        <a href="/support" class="hover:text-white">Support</a>
+        <a href="/help" class="hover:text-white">Help</a>
+    </div>
+    <p id="footer-copyright">© 2025 DaveSoftwarePeru. All rights reserved.</p>
   </footer>
+
+  <script>
+    const translations = {
+      en: {
+        'hero-subtitle': 'Automate your PC like a pro. Record and run macros with precision.',
+        'hero-download': 'Download now',
+        'hero-eula': 'By downloading, you agree to the <a href="https://davidbriangarcia.github.io/portafolio/autoplay/eula/" class="underline hover:text-white">EULA</a>.',
+        'features-title': 'What can you do with AutoPlay?',
+        'feature-1-title': '🎥 Record and replay actions',
+        'feature-1-desc': 'Capture clicks, mouse movements, and keystrokes with millimetric precision.',
+        'feature-2-title': '🔥Assign hotkeys to boring actions.',
+        'feature-2-desc': 'Run your macros with a single key or key combination to automate actions effortlessly.',
+        'feature-3-title': '⚡ Quick execution',
+        'feature-3-desc': 'Assign pre-recorded macros to side buttons to launch them instantly.',
+        'feature-4-title': '🛠️ Advanced modifiers',
+        'feature-4-desc': 'Add delay or repeat your macros as many times as you want.',
+        'feature-5-title': '🪶 Portable and lightweight',
+        'feature-5-desc': 'No installers or setup. Just download the 1MB .exe, and run it.',
+        'feature-6-title': '💾 Save and load macros',
+        'feature-6-desc': 'Export your macros as .json files for easy reuse.',
+        'feature-7-title': '🔐 Secure by design',
+        'feature-7-desc': 'Your data stays safe with built-in encryption and auto-login secured.',
+        'feature-8-title': '🌐 Multi-language ready',
+        'feature-8-desc': 'Now available in English and Spanish — more languages coming soon!',
+        'preview-title': 'Program Preview',
+        'preview-desc': 'This is how AutoPlay looks in action: recording and editing your macros.',
+        'pricing-title': 'Free vs PRO',
+        'table-feature': 'Feature',
+        'table-free': 'Free',
+        'table-pro': 'PRO',
+        'feature-simultaneous': 'Simultaneous Macros',
+        'feature-simultaneous-pro': 'Unlimited',
+        'feature-hotkeys': 'Hotkeys',
+        'feature-saveload': 'Save/Load .json',
+        'feature-support': 'Special Support',
+        'feature-future': 'Future features',
+        'table-price': 'Price',
+        'table-price-free': 'Free',
+        'table-price-pro': '$2/ month',
+        'cta-title': 'Unlock your productivity',
+        'cta-subtitle': 'For only <span class="font-bold text-green-300">$2 monthly</span> access the full power of AutoPlay.',
+        'cta-compatibility': 'Compatible with Windows 10 and 11',
+        'footer-copyright': '© 2025 DaveSoftwarePeru. All rights reserved.'
+      },
+      es: {
+        'hero-subtitle': 'Automatiza tu PC como un profesional. Graba y ejecuta macros con precisión.',
+        'hero-download': 'Descargar ahora',
+        'hero-eula': 'Al descargar, aceptas el <a href="https://davidbriangarcia.github.io/portafolio/autoplay/eula/" class="underline hover:text-white">EULA</a>.',
+        'features-title': '¿Qué puedes hacer con AutoPlay?',
+        'feature-1-title': '🎥 Graba y reproduce acciones',
+        'feature-1-desc': 'Captura clics, movimientos del ratón y pulsaciones de teclas con precisión milimétrica.',
+        'feature-2-title': '🔥 Asigna atajos a acciones aburridas.',
+        'feature-2-desc': 'Ejecuta tus macros con una sola tecla o combinación de teclas para automatizar acciones sin esfuerzo.',
+        'feature-3-title': '⚡ Ejecución rápida',
+        'feature-3-desc': 'Asigna macros pregrabadas a los botones laterales para lanzarlas al instante.',
+        'feature-4-title': '🛠️ Modificadores avanzados',
+        'feature-4-desc': 'Añade retardo o repite tus macros tantas veces como quieras.',
+        'feature-5-title': '🪶 Portátil y ligero',
+        'feature-5-desc': 'Sin instaladores ni configuración. Solo descarga el .exe de 1MB y ejecútalo.',
+        'feature-6-title': '💾 Guarda y carga macros',
+        'feature-6-desc': 'Exporta tus macros como archivos .json para reutilizarlos fácilmente.',
+        'feature-7-title': '🔐 Seguro por diseño',
+        'feature-7-desc': 'Tus datos permanecen seguros con encriptación incorporada y auto-login asegurado.',
+        'feature-8-title': '🌐 Listo para varios idiomas',
+        'feature-8-desc': 'Ahora disponible en inglés y español — ¡más idiomas próximamente!',
+        'preview-title': 'Vista Previa del Programa',
+        'preview-desc': 'Así es como se ve AutoPlay en acción: grabando y editando tus macros.',
+        'pricing-title': 'Gratis vs PRO',
+        'table-feature': 'Característica',
+        'table-free': 'Gratis',
+        'table-pro': 'PRO',
+        'feature-simultaneous': 'Macros simultáneos',
+        'feature-simultaneous-pro': 'Ilimitados',
+        'feature-hotkeys': 'Atajos',
+        'feature-saveload': 'Guardar/Cargar .json',
+        'feature-support': 'Soporte Especial',
+        'feature-future': 'Futuras características',
+        'table-price': 'Precio',
+        'table-price-free': 'Gratis',
+        'table-price-pro': '$2/ mes',
+        'cta-title': 'Desbloquea tu productividad',
+        'cta-subtitle': 'Por solo <span class="font-bold text-green-300">$2 mensuales</span> accede a todo el poder de AutoPlay.',
+        'cta-compatibility': 'Compatible con Windows 10 y 11',
+        'footer-copyright': '© 2025 DaveSoftwarePeru. Todos los derechos reservados.'
+      }
+    };
+
+    function setLanguage(lang) {
+      document.documentElement.lang = lang;
+      localStorage.setItem('language', lang);
+      for (const id in translations[lang]) {
+        const element = document.getElementById(id);
+        if (element) {
+          element.innerHTML = translations[lang][id];
+        }
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedLang = localStorage.getItem('language') || 'en';
+      setLanguage(savedLang);
+    });
+  </script>
 
 </body>
 </html>
