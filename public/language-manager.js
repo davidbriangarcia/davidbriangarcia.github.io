@@ -17,7 +17,7 @@ const translations = {
             'feature-4-title': '🛠️ Advanced modifiers',
             'feature-4-desc': 'Add delay or repeat your macros as many times as you need.',
             'feature-5-title': '🪶 Portable and lightweight',
-            'feature-5-desc': 'No installers or setup. Just download the 1MB .exe, and run it.',
+            'feature-5-desc': 'Super lightweight, only 5MB for all features! No complicated configurations required.',
             'feature-6-title': '💾 Save and load macros',
             'feature-6-desc': 'Export your macros as .json files for easy reuse.',
             'feature-7-title': '🔐 Secure by design',
@@ -42,7 +42,14 @@ const translations = {
             'cta-title': 'Unlock your productivity',
             'cta-subtitle': 'For only <span class="font-bold text-green-300">$2 monthly</span> access the full power of AutoPlay.',
             'cta-compatibility': 'Compatible with Windows 10 and 11',
-            'footer-copyright': '© 2025 DaveSoftwarePeru. All rights reserved.'
+            'footer-copyright': '© 2025 DaveSoftwarePeru. All rights reserved.',
+            'modal-title': 'Download AutoPlay',
+            'modal-version-label': 'Version:',
+            'modal-type-label': 'File type:',
+            'modal-btn-installer': 'Recommended installer (.msi)',
+            'modal-btn-zip': 'ZIP (portable)',
+            'modal-btn-exe': 'Direct EXE (English only)',
+            'modal-hint': 'Choose version and file type before downloading.'
         },
         es: {
             'hero-subtitle': 'Automatiza tu PC como un profesional. Graba y ejecuta macros con precisión.',
@@ -58,7 +65,7 @@ const translations = {
             'feature-4-title': '🛠️ Modificadores avanzados',
             'feature-4-desc': 'Añade una espera antes de cada macro o repite tus macros tantas veces como necesites.',
             'feature-5-title': '🪶 Portátil y ligero',
-            'feature-5-desc': 'Sin instaladores ni configuración. Solo descarga el .exe de 1MB y ejecútalo.',
+            'feature-5-desc': 'Súper ligero, solo 5Mb por todas las características! No requiere de configuraciones complicadas.',
             'feature-6-title': '💾 Guarda y carga macros',
             'feature-6-desc': 'Exporta tus macros como archivos .json para reutilizarlos fácilmente.',
             'feature-7-title': '🔐 Seguro por diseño',
@@ -83,7 +90,14 @@ const translations = {
             'cta-title': 'Desbloquea tu productividad',
             'cta-subtitle': 'Por solo <span class="font-bold text-green-300">$2 mensuales</span> accede a todo el poder de AutoPlay.',
             'cta-compatibility': 'Compatible con Windows 10 y 11',
-            'footer-copyright': '© 2025 DaveSoftwarePeru. Todos los derechos reservados.'
+            'footer-copyright': '© 2025 DaveSoftwarePeru. Todos los derechos reservados.',
+            'modal-title': 'Descargar AutoPlay',
+            'modal-version-label': 'Versión:',
+            'modal-type-label': 'Tipo de archivo:',
+            'modal-btn-installer': 'Instalador recomendado (.msi)',
+            'modal-btn-zip': 'ZIP (portable)',
+            'modal-btn-exe': 'EXE directo (solo inglés)',
+            'modal-hint': 'Elige la versión y el tipo de archivo antes de descargar.'
         }
     }
     // Add other pages' translations here, e.g., 'help-index': { en: {...}, es: {...} }
