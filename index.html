@@ -9,7 +9,6 @@
 </head>
 <body class="bg-gray-900 text-white font-sans" data-page-key="index">
 
-  <!-- Main Hero -->
   <section class="text-center py-10 px-4 bg-gradient-to-br from-blue-700 to-purple-700">
     <h1 class="text-4xl md:text-5xl font-bold mb-4">AutoPlay</h1>
     <p id="hero-subtitle" class="text-lg md:text-xl mb-6">Automate your PC like a pro. Record and run macros with precision.</p>
@@ -23,7 +22,6 @@
     </div>
   </section>
 
-  <!-- What it does -->
   <section class="py-4 px-4 max-w-4xl mx-auto">
     <h2 id="features-title" class="text-3xl font-bold text-center mb-8">What can you do with AutoPlay?</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -63,7 +61,6 @@
     </div>
   </section>
 
-  <!-- Preview -->
   <section class="py-12 px-4 text-center">
     <h2 id="preview-title" class="text-3xl font-bold mb-6">Program Preview</h2>
     <p id="preview-desc" class="mb-6 text-gray-300">This is how AutoPlay looks in action: recording and editing your macros.</p>
@@ -75,7 +72,6 @@
     </div>
   </section>
 
-  <!-- Free vs PRO -->
   <section class="py-12 px-4 bg-gray-800">
     <h2 id="pricing-title" class="text-3xl font-bold text-center mb-8">Free vs PRO</h2>
     <div class="overflow-x-auto">
@@ -123,14 +119,12 @@
     </div>
   </section>
 
-  <!-- Call to Action -->
   <section class="text-center py-16 px-4 bg-gradient-to-br from-purple-700 to-blue-700" id="download">
     <h2 id="cta-title" class="text-4xl font-bold mb-4">Unlock your productivity</h2>
     <p id="cta-subtitle" class="text-xl mb-6">For only <span class="font-bold text-green-300">$2 monthly</span> access the full power of AutoPlay.</p>
     <p id="cta-compatibility" class="mt-4 text-sm text-gray-200">Compatible with Windows 10 and 11</p>
   </section>
 
-  <!-- Footer -->
   <footer class="text-center py-6 text-gray-500 text-sm bg-gray-900 border-t border-gray-700">
     <div class="flex justify-center space-x-4 mb-4">
         <a href="#" onclick="setLanguage('en'); return false;" class="hover:text-white">English</a>
@@ -142,7 +136,6 @@
     <p id="footer-copyright">© 2025 DaveSoftwarePeru. All rights reserved.</p>
   </footer>
 
-  <!-- Modal de descarga -->
   <div id="download-modal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 hidden">
     <div id="modal-content" class="bg-gray-900 rounded-lg shadow-lg p-8 max-w-md w-full relative">
       <button id="close-modal" class="absolute top-2 right-2 text-gray-400 hover:text-white text-2xl">&times;</button>
@@ -167,17 +160,15 @@
 
   <script src="public/language-manager.js"></script>
   <script>
-    // filepath: c:\Dave\davidbriangarcia.github.io\index.html
     document.getElementById('download-btn').onclick = function() {
       document.getElementById('download-modal').classList.remove('hidden');
-      // Aplica traducción al abrir el modal
+
       const lang = localStorage.getItem('preferredLanguage') || 'en';
       if (typeof setLanguage === 'function') setLanguage(lang);
     };
     document.getElementById('close-modal').onclick = function() {
       document.getElementById('download-modal').classList.add('hidden');
     };
-    // Cerrar modal haciendo click fuera del contenido
     document.getElementById('download-modal').onclick = function(e) {
       if (e.target === this) {
         this.classList.add('hidden');
@@ -188,7 +179,6 @@
         const version = document.getElementById('version-select').value;
         const type = btn.getAttribute('data-type');
         let url = '';
-        // Cambia los nombres de archivo y rutas según tu estructura en Supabase
         if (type === 'installer') {
           url = `https://tugzzpqeuuwcipkcprsm.supabase.co/storage/v1/object/public/instaladores//AutoPlay-${version}-setup.exe`;
         } else if (type === 'zip') {
