@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+  <style>
+    /* Custom styles for better visual */
+    body {
+      background-color: #111827; /* bg-gray-900 */
+      color: #F9FAFB; /* text-gray-50 */
+    }
+    .swiper-slide {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    .swiper-button-next, .swiper-button-prev {
+      color: #ffffff;
+    }
+    .my-thumbs .swiper-slide {
+      cursor: pointer;
+      opacity: 0.5;
+      transition: opacity 0.3s ease;
+    }
+    .my-thumbs .swiper-slide-thumb-active {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="font-sans">
+
+  <header class="text-center py-8">
+    <h1 class="text-4xl md:text-5xl font-bold mb-2">My Work & Projects</h1>
+    <p class="text-lg md:text-xl text-gray-400">A selection of things I've built.</p>
+    <a href="/about" class="text-blue-400 hover:text-blue-300 mt-4 inline-block">About Me</a>
+  </header>
+
+  <main class="container mx-auto px-4 py-8">
+    <!-- Main Swiper -->
+    <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper my-swiper-main mb-4 rounded-lg">
+      <div class="swiper-wrapper">
+        <!-- Project 1 -->
+        <div class="swiper-slide bg-gray-800">
+          <div class="p-6">
+            <h3 class="text-2xl font-bold mb-2">Project Title 1</h3>
+            <img src="gallery1.png" alt="Project 1 Screenshot" class="max-w-full h-auto rounded-lg mb-4">
+            <p class="text-gray-300 mb-4">This is a brief description of the first project. Explain the technology used, the problem it solves, and your role.</p>
+            <a href="#" class="bg-blue-600 text-white font-bold px-5 py-2 rounded hover:bg-blue-700">View Project</a>
+          </div>
+        </div>
+        <!-- Project 2 -->
+        <div class="swiper-slide bg-gray-800">
+          <div class="p-6">
+            <h3 class="text-2xl font-bold mb-2">Project Title 2</h3>
+            <img src="gallery2.png" alt="Project 2 Screenshot" class="max-w-full h-auto rounded-lg mb-4">
+            <p class="text-gray-300 mb-4">This is a brief description of the second project. Explain the technology used, the problem it solves, and your role.</p>
+            <a href="#" class="bg-blue-600 text-white font-bold px-5 py-2 rounded hover:bg-blue-700">View Project</a>
+          </div>
+        </div>
+        <!-- Project 3 -->
+        <div class="swiper-slide bg-gray-800">
+          <div class="p-6">
+            <h3 class="text-2xl font-bold mb-2">Project Title 3</h3>
+            <img src="map1.png" alt="Project 3 Screenshot" class="max-w-full h-auto rounded-lg mb-4">
+            <p class="text-gray-300 mb-4">This is a brief description of the third project. Explain the technology used, the problem it solves, and your role.</p>
+            <a href="#" class="bg-blue-600 text-white font-bold px-5 py-2 rounded hover:bg-blue-700">View Project</a>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+    </div>
+
+    <!-- Thumbnails Swiper -->
+    <div thumbsSlider="" class="swiper my-thumbs h-24">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <img src="map2.png" class="rounded-md"/>
+        </div>
+        <div class="swiper-slide">
+          <img src="map2.png" class="rounded-md"/>
+        </div>
+        <div class="swiper-slide">
+          <img src="map2.png" class="rounded-md"/>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <footer class="text-center py-6 text-gray-500 text-sm">
+      <p>© 2025 DaveSoftwarePeru. All rights reserved.</p>
+  </footer>
+
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script>
+    var thumbsSwiper = new Swiper(".my-thumbs", {
+      spaceBetween: 10,
+      slidesPerView: 3,
+      freeMode: true,
+      watchSlidesProgress: true,
+    });
+
+    var mainSwiper = new Swiper(".my-swiper-main", {
+      spaceBetween: 10,
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+      thumbs: {
+        swiper: thumbsSwiper,
+      },
+    });
+  </script>
+</body>
+</html>
