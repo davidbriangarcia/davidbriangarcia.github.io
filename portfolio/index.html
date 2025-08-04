@@ -7,7 +7,6 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
   <style>
-    /* Custom styles for better visual */
     body {
       background-color: #111827; /* bg-gray-900 */
       color: #F9FAFB; /* text-gray-50 */
@@ -46,28 +45,37 @@
         <!-- Project 1 -->
         <div class="swiper-slide bg-gray-800">
           <div class="p-6">
-            <h3 class="text-2xl font-bold mb-2">Project Title 1</h3>
-            <img src="gallery1.png" alt="Project 1 Screenshot" class="max-w-full h-auto rounded-lg mb-4">
-            <p class="text-gray-300 mb-4">This is a brief description of the first project. Explain the technology used, the problem it solves, and your role.</p>
-            <a href="#" class="bg-blue-600 text-white font-bold px-5 py-2 rounded hover:bg-blue-700">View Project</a>
+            <h3 class="text-2xl font-bold mb-4">AutoPlay</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <img src="autoplay2.png" alt="Project 1 Screenshot A" class="w-full h-auto rounded-lg">
+              <img src="autoplay1.png" alt="Project 1 Screenshot B" class="w-full h-auto rounded-lg">
+            </div>
+            <p class="text-gray-300 mb-4">AutoPlay is a sophisticated desktop automation tool built with C# and WPF, designed for the low-level recording and replaying of complex user keyboard and mouse actions. It features a secure, modern backend powered by Supabase for user authentication (JWT), data persistence, and subscription management. Key technical achievements include seamless integration with the PayPal API, including webhooks for real-time event handling of Premium subscriptions, serverless backend logic using TypeScript-based Edge Functions, and robust security practices such as encrypted local storage for auto-login tokens. The application's architecture demonstrates advanced capabilities in system-level event handling, API integration, and software protection through code obfuscation.</p>
+            <a href="../index.html" class="bg-blue-600 text-white font-bold px-5 py-2 rounded hover:bg-blue-700">View Project</a>
           </div>
         </div>
         <!-- Project 2 -->
         <div class="swiper-slide bg-gray-800">
           <div class="p-6">
-            <h3 class="text-2xl font-bold mb-2">Project Title 2</h3>
-            <img src="gallery2.png" alt="Project 2 Screenshot" class="max-w-full h-auto rounded-lg mb-4">
-            <p class="text-gray-300 mb-4">This is a brief description of the second project. Explain the technology used, the problem it solves, and your role.</p>
-            <a href="#" class="bg-blue-600 text-white font-bold px-5 py-2 rounded hover:bg-blue-700">View Project</a>
+            <h3 class="text-2xl font-bold mb-4">GlobalWeather</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <img src="map1.png" alt="Project 2 Screenshot A" class="w-full h-auto rounded-lg">
+              <img src="map2.png" alt="Project 2 Screenshot B" class="w-full h-auto rounded-lg">
+            </div>
+            <p class="text-gray-300 mb-4">This project is a comprehensive, single-page weather application designed to provide users with detailed, real-time meteorological data for any location worldwide. It integrates multiple APIs (Tomorrow.io, Weatherbit.io, OpenCage, Wikipedia) to provide a rich experience, including real-time, historical, and forecast data. It features client-side caching, an interactive map with Leaflet.js, dynamic dark/light theming, and responsive data visualizations with Chart.js.</p>
+            <a href="/portfolio/weather/" class="bg-blue-600 text-white font-bold px-5 py-2 rounded hover:bg-blue-700">View Project</a>
           </div>
         </div>
         <!-- Project 3 -->
         <div class="swiper-slide bg-gray-800">
           <div class="p-6">
-            <h3 class="text-2xl font-bold mb-2">Project Title 3</h3>
-            <img src="map1.png" alt="Project 3 Screenshot" class="max-w-full h-auto rounded-lg mb-4">
-            <p class="text-gray-300 mb-4">This is a brief description of the third project. Explain the technology used, the problem it solves, and your role.</p>
-            <a href="#" class="bg-blue-600 text-white font-bold px-5 py-2 rounded hover:bg-blue-700">View Project</a>
+            <h3 class="text-2xl font-bold mb-4">Gallery</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <img src="gallery1.png" alt="Project 3 Screenshot A" class="w-full h-auto rounded-lg">
+              <img src="gallery2.png" alt="Project 3 Screenshot B" class="w-full h-auto rounded-lg">
+            </div>
+            <p class="text-gray-300 mb-4">This project is an advanced photo gallery and editor that aggregates images from multiple sources, including the Pexels, Pixabay, and Unsplash APIs, alongside local user uploads. It features a powerful client-side editor, allowing users to apply various filters, use presets, and perform precise cropping with Cropper.js. The application is built with modern JavaScript and features a responsive masonry layout, a dynamic dark theme, and a seamless interface for searching, viewing, and manipulating images.</p>
+            <a href="/portfolio/gallery/" class="bg-blue-600 text-white font-bold px-5 py-2 rounded hover:bg-blue-700">View Project</a>
           </div>
         </div>
       </div>
@@ -76,16 +84,18 @@
     </div>
 
     <!-- Thumbnails Swiper -->
-    <div thumbsSlider="" class="swiper my-thumbs h-24">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <img src="map2.png" class="rounded-md"/>
-        </div>
-        <div class="swiper-slide">
-          <img src="map2.png" class="rounded-md"/>
-        </div>
-        <div class="swiper-slide">
-          <img src="map2.png" class="rounded-md"/>
+    <div class="max-w-md mx-auto">
+      <div thumbsSlider="" class="swiper my-thumbs h-24">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <img src="mini1.png" class="w-full h-full object-cover rounded-md"/>
+          </div>
+          <div class="swiper-slide">
+            <img src="mini2.png" class="w-full h-full object-cover rounded-md"/>
+          </div>
+          <div class="swiper-slide">
+            <img src="mini3.png" class="w-full h-full object-cover rounded-md"/>
+          </div>
         </div>
       </div>
     </div>
