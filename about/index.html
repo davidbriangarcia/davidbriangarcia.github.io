@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="../public/logo64.ico" type="image/x-icon">
   <title>About Me</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
@@ -12,15 +13,25 @@
     }
   </style>
 </head>
-<body class="font-sans">
+<body class="font-sans bg-gray-900 text-white min-h-screen flex flex-col">
 
-  <header class="text-center py-8">
-    <h1 class="text-4xl md:text-5xl font-bold mb-2">About Me</h1>
-    <p class="text-lg md:text-xl text-gray-400">Creator, Developer, Innovator.</p>
-    <a href="/portfolio" class="text-blue-400 hover:text-blue-300 mt-4 inline-block">View My Portfolio</a>
-  </header>
+<nav class="bg-gradient-to-r from-purple-700 to-blue-700 shadow-lg">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+        <a href="../" class="flex items-center space-x-2">
+          <img src="../public/logo64.ico" alt="Logo" class="h-8 w-8">
+          <span class="text-white text-xl font-bold">AutoPlay</span>
+        </a>
+        <div class="flex space-x-4">
+          <a href="../about" class="text-gray-200 hover:text-white px-3 py-2 rounded-md text-sm font-medium">About</a>
+          <a href="../portfolio" class="text-gray-200 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Portfolio</a>
+          <a href="../support" class="text-gray-200 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Support</a>
+        </div>
+    </div>
+  </div>
+</nav>
 
-  <main class="container mx-auto px-4 py-8">
+  <main class="container mx-auto px-4 pt-8 flex-grow">
     <div class="max-w-4xl mx-auto bg-gray-800 rounded-lg shadow-lg p-8 md:flex md:items-start md:gap-8">
       
       <!-- Profile Picture -->

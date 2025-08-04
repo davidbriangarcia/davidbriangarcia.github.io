@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="icon" href="../public/logo64.ico" type="image/x-icon">
   <title>Register confirmed - AutoPlay</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -12,36 +13,40 @@
       color: #f0f0f0;
       margin: 0;
       padding: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
       text-align: center;
     }
-
-    .container {
+    .main-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: calc(100vh - 64px); /* Adjusted for nav height */
+    }
+    .content-box {
       max-width: 500px;
       background: #161b22;
       padding: 40px;
       border-radius: 12px;
       box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Center all content */
     }
-
+    .content-box ul {
+      text-align: left; /* Keep text in list left-aligned */
+      display: inline-block; /* Allow centering of the block */
+    }
     h1 {
       color: #58a6ff;
       margin-bottom: 10px;
     }
-
     p {
       line-height: 1.6;
       margin-bottom: 20px;
     }
-
     .highlight {
       font-weight: bold;
       color: #79c0ff;
     }
-
     .btn {
       display: inline-block;
       background: #238636;
@@ -52,11 +57,9 @@
       font-size: 16px;
       transition: background 0.3s;
     }
-
     .btn:hover {
       background: #2ea043;
     }
-
     img.preview {
       max-width: 100%;
       margin: 20px 0;
@@ -66,11 +69,29 @@
   </style>
 </head>
 <body>
-  <div class="container">
+
+<nav class="bg-gradient-to-r from-purple-700 to-blue-700 shadow-lg">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+        <a href="../" class="flex items-center space-x-2">
+          <img src="../public/logo64.ico" alt="Logo" class="h-8 w-8">
+          <span class="text-white text-xl font-bold">AutoPlay</span>
+        </a>
+        <div class="flex space-x-4">
+          <a href="../about" class="text-gray-200 hover:text-white px-3 py-2 rounded-md text-sm font-medium">About</a>
+          <a href="../portfolio" class="text-gray-200 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Portfolio</a>
+          <a href="../support" class="text-gray-200 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Support</a>
+        </div>
+    </div>
+  </div>
+</nav>
+
+<div class="main-content">
+  <div class="content-box">
     <h1>¡Thanks for your register!</h1>
     <p>Your register to <span class="highlight">AutoPlay</span> has been confirmed.</p>
     <p>Now you have full access for 3 days to:</p>
-    <ul style="text-align:left; padding-left: 20px;">
+    <ul>
       <li>✔️ Unlimmited customizable macros</li>
       <li>✔️ Automatic repeat with delay</li>
       <li>✔️ Side buttons for one-click execution</li>
@@ -80,5 +101,7 @@
     <img src="captura-app.png" alt="Vista previa del programa AutoPlay" class="preview"/>
     <a href="MiAutomatizador://launch" class="btn">Open AutoPlay</a>
   </div>
+</div>
+
 </body>
 </html>
