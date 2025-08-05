@@ -49,7 +49,8 @@ const translations = {
             'modal-btn-installer': 'Recommended installer (.msi)',
             'modal-btn-zip': 'ZIP (portable)',
             'modal-btn-exe': 'Direct EXE (English only)',
-            'modal-hint': 'Choose version and file type before downloading.'
+            'modal-hint': 'Choose version and file type before downloading.',
+            'modal-changelog-link': 'Changelog'
         },
         es: {
             'hero-subtitle': 'Automatiza tu PC como un profesional. Graba y ejecuta macros con precisión.',
@@ -97,7 +98,8 @@ const translations = {
             'modal-btn-installer': 'Instalador recomendado (.msi)',
             'modal-btn-zip': 'ZIP (portable)',
             'modal-btn-exe': 'EXE directo (solo inglés)',
-            'modal-hint': 'Elige la versión y el tipo de archivo antes de descargar.'
+            'modal-hint': 'Elige la versión y el tipo de archivo antes de descargar.',
+            'modal-changelog-link': 'Historial de cambios'
         }
     }
     // Add other pages' translations here, e.g., 'help-index': { en: {...}, es: {...} }
