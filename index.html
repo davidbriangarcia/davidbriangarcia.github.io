@@ -9,6 +9,10 @@
 </head>
 <body class="bg-gray-900 text-white font-sans" data-page-key="index">
 
+  <header id="app-header" class="bg-gray-800 shadow-md sticky top-0 z-40">
+      <!-- Dynamic header content will be injected here -->
+  </header>
+
   <section class="text-center py-10 px-4 bg-gradient-to-br from-blue-700 to-purple-700">
     <h1 class="text-4xl md:text-5xl font-bold mb-4">AutoPlay</h1>
     <p id="hero-subtitle" class="text-lg md:text-xl mb-6">Automate your PC like a pro. Record and run macros with precision.</p>
@@ -165,6 +169,62 @@
       </p>
     </div>
   </div>
+
+  <script type="module">
+    import { getSupabaseClient } from '/public/supabase-client.js';
+
+    async function handleLogout() {
+        const supabase = await getSupabaseClient();
+        const { error } = await supabase.auth.signOut();
+        if (error) {
+            console.error('Error logging out:', error);
+        } else {
+            renderHeader(false); // Re-render header for logged-out state
+        }
+    }
+
+    function renderHeader(isLoggedIn) {
+        const headerContainer = document.getElementById('app-header');
+        if (!headerContainer) return;
+
+        let headerHtml = `
+            <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+                <a href="/" class="text-xl font-bold text-white">AutoPlay</a>
+                <div>`;
+        if (isLoggedIn) {
+            headerHtml += `<a href="/dashboard/" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Dashboard</a>`;
+            headerHtml += `<button id="logout-btn" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Logout</button>`;
+        } else {
+            headerHtml += `<a href="/login/" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Login</a>`;
+            headerHtml += `<a href="/signup/" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Sign Up</a>`;
+        }
+        headerHtml += `</div></nav>`;
+        headerContainer.innerHTML = headerHtml;
+
+        if (isLoggedIn) {
+            document.getElementById('logout-btn').addEventListener('click', handleLogout);
+        }
+    }
+
+    async function checkSession() {
+        const supabase = await getSupabaseClient();
+        if (!supabase) {
+            renderHeader(false);
+            return;
+        }
+        
+        const { data: { session } } = await supabase.auth.getSession();
+        renderHeader(!!session);
+
+        supabase.auth.onAuthStateChange((_event, session) => {
+            renderHeader(!!session);
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        checkSession();
+    });
+  </script>
 
   <script src="public/language-manager.js"></script>
   <script>

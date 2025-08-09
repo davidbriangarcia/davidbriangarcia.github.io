@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - AutoPlay</title>
+    <link rel="icon" href="/public/logo64.ico" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white font-sans">
+
+    <!-- Header will be inserted here by JavaScript -->
+    <header id="app-header" class="bg-gray-800 shadow-md">
+        <!-- Dynamic header content -->
+    </header>
+
+    <main class="container mx-auto p-4">
+        <div id="loading" class="text-center p-8">
+            <p>Loading user data...</p>
+        </div>
+
+        <div id="dashboard-content" class="hidden">
+            <h1 class="text-3xl font-bold mb-4">Dashboard</h1>
+            <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+                <h2 class="text-xl font-semibold mb-2">Account Information</h2>
+                <p><strong>Email:</strong> <span id="user-email"></span></p>
+                <p><strong>User ID:</strong> <span id="user-id"></span></p>
+            </div>
+
+            <div class="bg-gray-800 p-6 rounded-lg shadow-lg mt-6">
+                <h2 class="text-xl font-semibold mb-2">Subscription Status</h2>
+                <div id="subscription-info">
+                    <p><strong>Status:</strong> <span id="subscription-status"></span></p>
+                    <p><strong>Plan:</strong> <span id="subscription-plan"></span></p>
+                </div>
+                <div id="upgrade-section" class="mt-4">
+                    <!-- Upgrade button will be here -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script type="module">
+        import { getSupabaseClient } from '/public/supabase-client.js';
+
+        const loadingDiv = document.getElementById('loading');
+        const dashboardContentDiv = document.getElementById('dashboard-content');
+        const userEmailEl = document.getElementById('user-email');
+        const userIdEl = document.getElementById('user-id');
+        const subscriptionStatusEl = document.getElementById('subscription-status');
+        const subscriptionPlanEl = document.getElementById('subscription-plan');
+        const upgradeSection = document.getElementById('upgrade-section');
+        const headerContainer = document.getElementById('app-header');
+
+        async function main() {
+            const supabase = await getSupabaseClient();
+            if (!supabase) {
+                loadingDiv.textContent = "Error connecting to the server.";
+                return;
+            }
+
+            // Check session
+            const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+
+            if (sessionError) {
+                console.error('Error getting session:', sessionError);
+                window.location.href = '/login/';
+                return;
+            }
+
+            if (!session) {
+                // If no session, redirect to login
+                window.location.href = '/login/';
+                return;
+            }
+
+            // User is logged in, display their info
+            const user = session.user;
+            userEmailEl.textContent = user.email;
+            userIdEl.textContent = user.id;
+
+            // Fetch license info
+            const { data: license, error: licenseError } = await supabase
+                .from('licenses')
+                .select('*')
+                .eq('user_id', user.id)
+                .single();
+
+            if (licenseError && licenseError.code !== 'PGRST116') { // Ignore 'no rows found' error
+                console.error('Error fetching license:', licenseError);
+                subscriptionStatusEl.textContent = 'Error loading status.';
+            } else if (license) {
+                subscriptionStatusEl.textContent = license.status || 'N/A';
+                subscriptionPlanEl.textContent = license.plan || 'Free';
+                 if (license.plan !== 'PRO') {
+                    const upgradeButton = document.createElement('button');
+                    upgradeButton.textContent = 'Upgrade to PRO';
+                    upgradeButton.className = 'bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded';
+                    upgradeButton.onclick = handleUpgrade;
+                    upgradeSection.appendChild(upgradeButton);
+                }
+            } else {
+                subscriptionStatusEl.textContent = 'Free';
+                subscriptionPlanEl.textContent = 'Free';
+                const upgradeButton = document.createElement('button');
+                upgradeButton.textContent = 'Upgrade to PRO';
+                upgradeButton.className = 'bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded';
+                upgradeButton.onclick = handleUpgrade;
+                upgradeSection.appendChild(upgradeButton);
+            }
+
+            // Show content
+            loadingDiv.classList.add('hidden');
+            dashboardContentDiv.classList.remove('hidden');
+            renderHeader(true);
+        }
+
+        async function handleUpgrade(event) {
+            const upgradeButton = event.target;
+            upgradeButton.disabled = true;
+            upgradeButton.textContent = 'Redirecting to payment...';
+
+            const supabase = await getSupabaseClient();
+            const { data: { user } } = await supabase.auth.getUser();
+
+            if (!user) {
+                alert('You must be logged in to upgrade.');
+                window.location.href = '/login/';
+                return;
+            }
+
+            try {
+                const { data, error } = await supabase.functions.invoke('create-subscription', {
+                    body: { deviceId: user.id } // Using user.id as a substitute for deviceId
+                });
+
+                if (error) {
+                    throw error;
+                }
+
+                if (data && data.approval_link) {
+                    window.location.href = data.approval_link;
+                } else {
+                    throw new Error('No approval link received from server.');
+                }
+            } catch (error) {
+                console.error('Error creating subscription:', error);
+                alert(`Error: ${error.message}`);
+                upgradeButton.disabled = false;
+                upgradeButton.textContent = 'Upgrade to PRO';
+            }
+        }
+
+        async function handleLogout() {
+            const supabase = await getSupabaseClient();
+            const { error } = await supabase.auth.signOut();
+            if (error) {
+                console.error('Error logging out:', error);
+            } else {
+                window.location.href = '/';
+            }
+        }
+
+        function renderHeader(isLoggedIn) {
+            let headerHtml = `
+                <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+                    <a href="/" class="text-xl font-bold text-white">AutoPlay</a>
+                    <div>`;
+            if (isLoggedIn) {
+                headerHtml += `<a href="/dashboard/" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Dashboard</a>`;
+                headerHtml += `<button id="logout-btn" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Logout</button>`;
+            } else {
+                headerHtml += `<a href="/login/" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Login</a>`;
+                headerHtml += `<a href="/signup/" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Sign Up</a>`;
+            }
+            headerHtml += `</div></nav>`;
+            headerContainer.innerHTML = headerHtml;
+
+            if (isLoggedIn) {
+                document.getElementById('logout-btn').addEventListener('click', handleLogout);
+            }
+        }
+
+        main();
+    </script>
+
+</body>
+</html>

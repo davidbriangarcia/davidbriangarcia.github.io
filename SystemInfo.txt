@@ -1,0 +1,125 @@
+# AutoPlay System Information
+
+## 1. Core Functionality & Technology
+
+- **Project Name:** AutoPlay
+- **Core Technology:** C# WPF Desktop Application (.NET Framework)
+- **Primary Purpose:** A macro/automation tool that allows users to record, save, load, and play back keyboard and mouse actions.
+- **Business Model:** Freemium software with a subscription model (Free vs. Premium tiers) managed via user accounts and online payments.
+
+---
+
+## 2. System Architecture
+
+### Frontend (Client)
+- **Framework:** Windows Presentation Foundation (WPF) for the UI.
+- **Language:** C#
+- **Key Libraries:**
+    - **`Gma.System.MouseKeyHook`:** Used for capturing global keyboard and mouse events during the recording process.
+    - **`WindowsInput`:** Used for simulating keyboard and mouse actions during playback.
+    - **`System.Text.Json`:** Used for all serialization and deserialization of local settings, macro files, and communication with the backend.
+
+### Backend (Server)
+- **Platform:** Supabase
+- **Services Used:**
+    - **Supabase Auth:** Manages user registration, login (email/password), and JWT (Access/Refresh Token) based authentication.
+    - **Supabase Database:** Stores user license and subscription information in a `licenses` table.
+    - **Supabase Functions:** Serverless functions (written in TypeScript) used to handle business logic that shouldn't be on the client, such as creating payment links and validating data.
+
+---
+
+## 3. Data Flow & Key Processes
+
+### a. Application Startup
+1.  **`App.xaml.cs`:** The application entry point.
+2.  **Remote Config Fetch:** `AppSettingsManager.LoadSettingsAsync()` is called first. It makes an HTTP request to the `get-supabase-config` Supabase function to fetch the Supabase URL and Anon Key. This is a critical blocking step.
+3.  **Local Settings Load:** `AppDataManager`'s static constructor loads local settings (`app.settings.json`) from the user's `%APPDATA%\AutoPlay` folder.
+4.  **Language Initialization:** The language preference from local settings is used to set the application's culture (`Thread.CurrentUICulture`), enabling localization.
+5.  **Login Window:** `LoginWindow` is displayed. It attempts an auto-login if a valid, encrypted refresh token is found in the settings.
+6.  **Authentication:** The user logs in or auto-login succeeds. `ServiceD` communicates with Supabase Auth to get a valid Access Token and Refresh Token.
+7.  **Main Window:** If login is successful, the `MainWindow` is created and displayed. The Access Token is stored in memory for subsequent backend requests.
+
+### b. User Authentication Flow
+1.  **Credentials:** User enters email/password in `LoginWindow`.
+2.  **Request:** `ServiceD` sends a request to the Supabase `/auth/v1/token` endpoint.
+3.  **Response:** Supabase returns a JWT Access Token and a Refresh Token.
+4.  **Storage:**
+    - The Access Token is held in memory by `ServiceD` for API calls.
+    - If "Remember Me" is checked, the Refresh Token is encrypted using `ProtectedData.Protect` and stored in `app.settings.json`.
+5.  **Auto-Login:** On next startup, the encrypted refresh token is decrypted and sent to the `/auth/v1/token` endpoint to get a new set of tokens without requiring a password.
+
+### c. Macro Recording & Playback
+1.  **Recording:**
+    - User clicks "Record" in `MainWindow`.
+    - `Gma.System.MouseKeyHook` is activated to listen for global mouse/keyboard events.
+    - Each event (e.g., `OnMouseDown`, `OnKeyDown`) is captured and converted into a `RecordedAction` object.
+    - Actions are stored in a temporary list with a high-resolution timestamp from a `Stopwatch`.
+    - When "Stop" is clicked, the timestamps are processed to calculate the delay between each action. The final list of actions is loaded into the `DataGrid`.
+2.  **Playback:**
+    - User clicks "Play".
+    - The application iterates through the list of `RecordedAction` objects in the `DataGrid`.
+    - For each action, it waits for the specified `DelayMs`.
+    - It then uses the `WindowsInput` library to simulate the action (e.g., `simulador.Mouse.LeftButtonDown()`, `simulador.Keyboard.KeyDown()`).
+
+### e. Screen Trigger (Image-Based Automation)
+1.  **Configuration:**
+    - User clicks the "Screen Trigger" button in `MainWindow` to open the `ScreenTriggerConfigWindow`.
+    - **Area Selection:** The user clicks "Select Area," which opens a transparent, full-screen `SelectionWindow`. The user clicks and drags to draw a rectangle, defining the screen region to monitor.
+    - **Macro Selection:** The user selects a pre-existing macro from a `ComboBox` to be executed when a change is detected.
+    - **Max Triggers:** The user can set a limit on how many times the trigger can fire before it automatically stops.
+2.  **Execution:**
+    - When "Start Watching" is clicked, a `ScreenWatcher` object is created.
+    - The `ScreenWatcher` uses a `System.Threading.Timer` to periodically capture an image of the selected screen region.
+    - It compares the current image with the previously captured image. If they are different, it raises a `ScreenChanged` event.
+    - The `ScreenTriggerConfigWindow` listens for this event and, upon receiving it, calls the public `ExecutePlayback` method in `MainWindow` to run the selected macro.
+    - If the `Max Triggers` limit is reached, a `TriggerLimitReached` event is raised, and the watcher stops automatically to prevent infinite loops.
+
+### f. Scheduler
+1.  **Configuration:**
+    - User clicks the "Scheduler" button in `MainWindow` to open the `SchedulerWindow`.
+    - **Macro Selection:** The user selects a pre-existing macro from a `ComboBox`.
+    - **Date & Time:** The user picks a date and time for the macro to run.
+2.  **Execution:**
+    - When "Save" is clicked, the `MainWindow` stores the selected macro name and the scheduled `DateTime`.
+    - A `DispatcherTimer` in `MainWindow` ticks every second.
+    - On each tick, it checks if the current time is past the scheduled time.
+    - If it is, it executes the macro using the same `HotkeyAction` method as the hotkeys, ensuring consistent playback logic.
+    - After execution, the scheduled task is cleared to prevent it from running again.
+    - The main window's status bar is updated to show which macro is scheduled and at what time.
+
+### d. Subscription & Payment Flow
+1.  **Initiation:** User clicks "Upgrade" in `SubscriptionWindow`.
+2.  **Request to Backend:** The client calls `ServiceC.CreateSubscription()`, which in turn calls `ServiceD.InvokeFunction()` for the `create-subscription` Supabase function. The user's `deviceId` is sent in the request body.
+3.  **Supabase Function:** The `create-subscription` function on the server communicates with the PayPal API to create a new subscription order.
+4.  **PayPal Link:** The PayPal API returns a unique `approval_link`. The Supabase function passes this link back to the client.
+5.  **Redirect:** The AutoPlay client receives the `approval_link` and uses `Process.Start()` to open it in the user's default web browser to complete the payment on PayPal's website.
+6.  **Webhook:** PayPal notifies the `paypal-webhook` Supabase function when the payment is successful. This webhook is responsible for updating the user's record in the `licenses` database table (e.g., setting `status` to "active" and `plan` to "premium").
+
+---
+
+## 4. Local Data Storage
+
+All user-specific data is stored in `%APPDATA%\AutoPlay\`.
+
+- **`app.settings.json`:** Stores all user preferences.
+    - `ThemeName`: "Light" or "Dark".
+    - `Language`: "en-US" or "es".
+    - `RecordStopHotkey`: Global hotkey for recording.
+    - `RememberMe`, `LastUsedEmail`, `EncryptedRefreshToken`: For auto-login.
+    - Window position and other UI settings.
+- **`macros.config.json`:** Stores the configuration for the macro buttons displayed in the `MainWindow` sidebar (Name, Hotkey, FilePath, etc.).
+- **`AutoPlay.log`:** A text file for logging application events, warnings, and errors.
+- **`Macros\` (Folder):** The default location where saved macro `*.json` files are stored.
+
+---
+
+## 5. Obfuscation Strategy
+
+- **Tool:** ConfuserEx
+- **Configuration:** `aaaa.crproj`
+- **Strategy:**
+    - The `preset="maximum"` is used, but it requires careful exclusions to prevent breaking the application.
+    - **Resource Loading:** Obfuscation is completely disabled for the language satellite assembly (`es\AutoPlay.resources.dll`) to ensure localization works.
+    - **Reflection/Serialization:** The primary strategy is to add the `[Obfuscation(Exclude = true)]` attribute directly in the C# source code to any class that is serialized/deserialized by `System.Text.Json` or is a WPF `Window` or `App`. This prevents ConfuserEx from renaming these types, which would break the application at runtime.
+    - **Affected Classes:** `LoginWindow`, `MainWindow`, `ConfigWindow`, `SubscriptionWindow`, `AuthResponse`, `DataContainer`, `CreateSubscriptionRequest`, `CreateSubscriptionResponse`, `AppSettings`, `MacroConfig`, `Recording`, `RecordedAction`, etc.
+    - **Anonymous Types:** Using anonymous types (e.g., `new { deviceId = "..." }`) for serialization is avoided, as they cannot be decorated with the exclusion attribute. They are replaced with concrete classes.
