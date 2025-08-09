@@ -21,7 +21,7 @@
         <span id="hero-download">Download AutoPlay Now!</span>
       </button>
       <p id="hero-eula" class="mt-2 text-sm text-gray-300">
-        By downloading, you agree to the <a href="/eula" class="underline hover:text-white">EULA</a>.
+        By downloading, you agree to the <a href="/eula" class="underline hover:text-white">EULA</a> and <a href="/privacy" class="underline hover:text-white">Privacy Policy</a>.
       </p>
     </div>
   </section>
@@ -126,6 +126,9 @@
   <section class="text-center py-16 px-4 bg-gradient-to-br from-purple-700 to-blue-700" id="download">
     <h2 id="cta-title" class="text-4xl font-bold mb-4">Unlock your productivity</h2>
     <p id="cta-subtitle" class="text-xl mb-6">For only <span class="font-bold text-green-300">$2 monthly</span> access the full power of AutoPlay.</p>
+    <a id="cta-upgrade-btn" href="/login/" class="bg-white text-gray-900 font-bold px-8 py-4 rounded hover:bg-gray-200 inline-block text-lg">
+        <span id="cta-upgrade-btn-text">Upgrade to PRO</span>
+    </a>
     <p id="cta-compatibility" class="mt-4 text-sm text-gray-200">Compatible with Windows 10 and 11</p>
   </section>
 
@@ -179,45 +182,62 @@
         if (error) {
             console.error('Error logging out:', error);
         } else {
-            renderHeader(false); // Re-render header for logged-out state
+            updateUIForAuthState(false); // Re-render UI for logged-out state
         }
     }
 
-    function renderHeader(isLoggedIn) {
+    function updateUIForAuthState(isLoggedIn) {
+        // 1. Update Header
         const headerContainer = document.getElementById('app-header');
-        if (!headerContainer) return;
-
-        let headerHtml = `
+        if (headerContainer) {
+            let headerHtml = `
             <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
-                <a href="/" class="text-xl font-bold text-white">AutoPlay</a>
+                <a href="/" class="flex items-center space-x-2">
+                    <img src="/public/logo64.ico" alt="AutoPlay Logo" class="h-8 w-8">
+                    <span class="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">AutoPlay</span>
+                </a>
                 <div>`;
-        if (isLoggedIn) {
-            headerHtml += `<a href="/dashboard/" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Dashboard</a>`;
-            headerHtml += `<button id="logout-btn" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Logout</button>`;
-        } else {
-            headerHtml += `<a href="/login/" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Login</a>`;
-            headerHtml += `<a href="/signup/" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Sign Up</a>`;
-        }
-        headerHtml += `</div></nav>`;
-        headerContainer.innerHTML = headerHtml;
+            if (isLoggedIn) {
+                headerHtml += `<a href="/dashboard/" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Dashboard</a>`;
+                headerHtml += `<button id="logout-btn" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Logout</button>`;
+            } else {
+                headerHtml += `<a href="/login/" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Login</a>`;
+                headerHtml += `<a href="/signup/" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Sign Up</a>`;
+            }
+            headerHtml += `</div></nav>`;
+            headerContainer.innerHTML = headerHtml;
 
-        if (isLoggedIn) {
-            document.getElementById('logout-btn').addEventListener('click', handleLogout);
+            if (isLoggedIn) {
+                document.getElementById('logout-btn').addEventListener('click', handleLogout);
+            }
+        }
+
+        // 2. Update CTA Button
+        const ctaButton = document.getElementById('cta-upgrade-btn');
+        const ctaButtonText = document.getElementById('cta-upgrade-btn-text');
+        if (ctaButton && ctaButtonText) {
+            if (isLoggedIn) {
+                ctaButton.href = '/dashboard/';
+                ctaButtonText.textContent = 'Go to Dashboard';
+            } else {
+                ctaButton.href = '/login/';
+                ctaButtonText.textContent = 'Upgrade to PRO';
+            }
         }
     }
 
     async function checkSession() {
         const supabase = await getSupabaseClient();
         if (!supabase) {
-            renderHeader(false);
+            updateUIForAuthState(false);
             return;
         }
         
         const { data: { session } } = await supabase.auth.getSession();
-        renderHeader(!!session);
+        updateUIForAuthState(!!session);
 
         supabase.auth.onAuthStateChange((_event, session) => {
-            renderHeader(!!session);
+            updateUIForAuthState(!!session);
         });
     }
 

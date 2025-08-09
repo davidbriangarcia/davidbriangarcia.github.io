@@ -32,6 +32,7 @@
                 <div id="subscription-info">
                     <p><strong>Status:</strong> <span id="subscription-status"></span></p>
                     <p><strong>Plan:</strong> <span id="subscription-plan"></span></p>
+                    <p id="end-date-row" class="hidden"><strong>Expires on:</strong> <span id="subscription-end-date"></span></p>
                 </div>
                 <div id="upgrade-section" class="mt-4">
                     <!-- Upgrade button will be here -->
@@ -49,6 +50,8 @@
         const userIdEl = document.getElementById('user-id');
         const subscriptionStatusEl = document.getElementById('subscription-status');
         const subscriptionPlanEl = document.getElementById('subscription-plan');
+        const endDateRow = document.getElementById('end-date-row');
+        const subscriptionEndDateEl = document.getElementById('subscription-end-date');
         const upgradeSection = document.getElementById('upgrade-section');
         const headerContainer = document.getElementById('app-header');
 
@@ -91,13 +94,27 @@
                 subscriptionStatusEl.textContent = 'Error loading status.';
             } else if (license) {
                 subscriptionStatusEl.textContent = license.status || 'N/A';
-                subscriptionPlanEl.textContent = license.plan || 'Free';
-                 if (license.plan !== 'PRO') {
+                subscriptionPlanEl.textContent = license.plan || 'Free'; // Keep showing plan name if available
+                
+                if (license.status === 'active' && license.end_date) {
+                    const date = new Date(license.end_date);
+                    subscriptionEndDateEl.textContent = date.toLocaleDateString();
+                    endDateRow.classList.remove('hidden');
+                } else {
+                    endDateRow.classList.add('hidden');
+                }
+
+                if (license.status !== 'active') {
+                    // Clear previous button if it exists, to prevent duplicates
+                    upgradeSection.innerHTML = ''; 
                     const upgradeButton = document.createElement('button');
                     upgradeButton.textContent = 'Upgrade to PRO';
                     upgradeButton.className = 'bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded';
                     upgradeButton.onclick = handleUpgrade;
                     upgradeSection.appendChild(upgradeButton);
+                } else {
+                    // If user is active, ensure no upgrade button is shown
+                    upgradeSection.innerHTML = '';
                 }
             } else {
                 subscriptionStatusEl.textContent = 'Free';
@@ -164,7 +181,10 @@
         function renderHeader(isLoggedIn) {
             let headerHtml = `
                 <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
-                    <a href="/" class="text-xl font-bold text-white">AutoPlay</a>
+                    <a href="/" class="flex items-center space-x-2">
+                        <img src="/public/logo64.ico" alt="AutoPlay Logo" class="h-8 w-8">
+                        <span class="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">AutoPlay</span>
+                    </a>
                     <div>`;
             if (isLoggedIn) {
                 headerHtml += `<a href="/dashboard/" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Dashboard</a>`;

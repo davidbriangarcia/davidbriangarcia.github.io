@@ -6,7 +6,7 @@ const translations = {
         en: {
             'hero-subtitle': 'Automate your PC like a pro. Record and run macros with precision.',
             'hero-download': 'Download now',
-            'hero-eula': 'By downloading, you agree to the <a href="https://autoplaype.com/eula/" class="underline hover:text-white">EULA</a>.',
+            'hero-eula': 'By downloading, you agree to the <a href="/eula" class="underline hover:text-white">EULA</a> and <a href="/privacy" class="underline hover:text-white">Privacy Policy</a>',
             'features-title': 'What can you do with AutoPlay?',
             'feature-1-title': '🎥 Record and replay actions',
             'feature-1-desc': 'Capture clicks, mouse movements, and keystrokes with millimetric precision.',
@@ -55,7 +55,7 @@ const translations = {
         es: {
             'hero-subtitle': 'Automatiza tu PC como un profesional. Graba y ejecuta macros con precisión.',
             'hero-download': 'Descargar ahora',
-            'hero-eula': 'Al descargar, aceptas el <a href="https://autoplaype.com/eula/" class="underline hover:text-white">EULA</a>.',
+            'hero-eula': 'Al descargar, aceptas el <a href="https://autoplaype.com/eula/" class="underline hover:text-white">EULA</a> y la <a href="/privacy" class="underline hover:text-white">Politica de privacidad</a>.',
             'features-title': '¿Qué puedes hacer con AutoPlay?',
             'feature-1-title': '🎥 Graba y reproduce acciones',
             'feature-1-desc': 'Captura clics, movimientos del ratón y pulsaciones de teclas con precisión milimétrica.',
