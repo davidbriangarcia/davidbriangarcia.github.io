@@ -29,17 +29,23 @@
     .my-thumbs .swiper-slide-thumb-active {
       opacity: 1;
     }
+    .swiper-pagination-bullet {
+      background-color: #fff;
+    }
+    .swiper-pagination-bullet-active {
+      background-color: #3b82f6;
+    }
   </style>
 </head>
 <body class="font-sans">
 
-  <header class="text-center py-8">
+  <header class="text-center py-2">
     <h1 class="text-4xl md:text-5xl font-bold mb-2">My Work & Projects</h1>
     <p class="text-lg md:text-xl text-gray-400">A selection of things I've built.</p>
-    <a href="/about" class="text-blue-400 hover:text-blue-300 mt-4 inline-block">About Me</a>
+    <a href="/about" class="text-blue-400 hover:text-blue-300 inline-block">About Me</a>
   </header>
 
-  <main class="container mx-auto px-4 py-8">
+  <main class="container mx-auto px-4">
     <!-- Main Swiper -->
     <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper my-swiper-main mb-4 rounded-lg">
       <div class="swiper-wrapper">
@@ -51,8 +57,19 @@
               <img src="autoplay2.png" alt="Project 1 Screenshot A" class="w-full h-auto rounded-lg">
               <img src="autoplay1.png" alt="Project 1 Screenshot B" class="w-full h-auto rounded-lg">
             </div>
-            <p class="text-gray-300 mb-4">AutoPlay is a sophisticated desktop automation tool built with C# and WPF, designed for the low-level recording and replaying of complex user keyboard and mouse actions. It features a secure, modern backend powered by Supabase for user authentication (JWT), data persistence, and subscription management. Key technical achievements include seamless integration with the PayPal API, including webhooks for real-time event handling of Premium subscriptions, serverless backend logic using TypeScript-based Edge Functions, and robust security practices such as encrypted local storage for auto-login tokens. The application's architecture demonstrates advanced capabilities in system-level event handling, API integration, and software protection through code obfuscation.</p>
+            <p class="text-gray-300 mb-4">AutoPlay is a sophisticated desktop automation tool built with C# and WPF, designed for recording and replaying actions. It features a secure, modern backend powered by Supabase for user authentication (JWT), data persistence, and subscription management. Key technical achievements include seamless integration with the PayPal API, including webhooks for real-time event handling of Premium subscriptions, serverless backend logic using TypeScript-based Edge Functions, and robust security practices. The application's architecture demonstrates advanced capabilities in system-level event handling, API integration, and software protection through code obfuscation.</p>
             <a href="../index.html" class="bg-blue-600 text-white font-bold px-5 py-2 rounded hover:bg-blue-700">View Project</a>
+          </div>
+        </div>
+        <div class="swiper-slide bg-gray-800">
+          <div class="p-6">
+            <h3 class="text-2xl font-bold mb-4">AI Notes</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <img src="ai1.png" alt="Project 7 Screenshot A" class="w-full h-auto rounded-lg">
+              <img src="ai2.png" alt="Project 7 Screenshot B" class="w-full h-auto rounded-lg">
+            </div>
+            <p class="text-gray-300 mb-4">AI Notes is a full-stack application built with Next.js and Firebase, deployed on Vercel. It enables users to create notes from text input, microphone recordings, or camera/file uploads (audio and image). The system integrates AI services to automatically summarize content, generate context-aware titles, and assign tags and categories for efficient retrieval and organization</p>
+            <a href="https://notes-two-vert.vercel.app/" class="bg-blue-600 text-white font-bold px-5 py-2 rounded hover:bg-blue-700">View Project</a>
           </div>
         </div>
         <!-- Project 2 -->
@@ -128,6 +145,9 @@
             <img src="mini1.png" class="w-full h-full object-cover rounded-md"/>
           </div>
           <div class="swiper-slide">
+            <img src="mini7.png" class="w-full h-full object-cover rounded-md"/>
+          </div>
+          <div class="swiper-slide">
             <img src="mini2.png" class="w-full h-full object-cover rounded-md"/>
           </div>
           <div class="swiper-slide">
@@ -143,6 +163,7 @@
             <img src="mini6.png" class="w-full h-full object-cover rounded-md"/>
           </div>
         </div>
+        <div class="swiper-pagination"></div>
       </div>
     </div>
   </main>
@@ -158,6 +179,10 @@
       slidesPerView: 3,
       freeMode: true,
       watchSlidesProgress: true,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
     });
 
     var mainSwiper = new Swiper(".my-swiper-main", {
@@ -165,6 +190,10 @@
       navigation: {
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
       },
       thumbs: {
         swiper: thumbsSwiper,
