@@ -1,1 +1,0 @@
-help me to add dots to let people know that there're more than 3 projects. the slidesPerView is 3 to maintain the proportion of the miniatures
